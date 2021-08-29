@@ -18,3 +18,14 @@ command=python3 -m flask run --host=0.0.0.0
 directory=/home/pi/airlog
 command=python3 logger.py
 ```
+
+Create database
+```
+import sqlite3
+
+con = sqlite3.connect('airlog.db')
+cur = con.cursor()
+cur.execute('''CREATE TABLE readings (date text, co2 real, temperature real, humidity real)''')
+con.commit()
+con.close()
+```
