@@ -10,8 +10,6 @@ def test_concentration():
     con = sqlite3.connect("airlog.db")
     df = pd.read_sql_query("SELECT * FROM readings", con)
 
-    print(df.to_json())
-
     con.close()
 
     timestamps = df['date'].values.tolist()

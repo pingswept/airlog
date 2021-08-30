@@ -9,7 +9,9 @@
     </head>
     <body>
         This is fine.
-        <canvas id="airChart" width="400" height="400"></canvas>
+        <div class="chart-container" style="position: relative; height:40vh; width:80vw">
+            <canvas id="airChart" width="400" height="400"></canvas>
+        </div>
     </body>
     <script>
     var ctx = document.getElementById('airChart').getContext("2d");
@@ -21,7 +23,7 @@
         labels: timestamps,
         datasets: [
             {
-                label: "My First dataset",
+                label: "CO2 concentration in Nolop [PPM]",
                 fillColor: "rgba(220,220,220,0.2)",
                 strokeColor: "rgba(220,220,220,1)",
                 pointColor: "rgba(220,220,220,1)",
@@ -32,6 +34,17 @@
             }
         ]
     };
-    var airChart = new Chart(ctx).Line(data);
+    var airChart = new Chart(ctx, {
+        type: 'line',
+        data: data,
+        options: {
+            maintainAspectRatio: false,
+            scales: {
+                y: {
+                    max: 1000
+                }
+            }
+        }
+    });
     </script>
-</html>
+v</html>
