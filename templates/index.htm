@@ -8,17 +8,30 @@
         <title>Nolop Air Quality</title>
     </head>
     <body>
-This is fine.
-    <canvas id="airChart" width="400" height="400"></canvas>
-    <script>
-    var ctx = document.getElementById('airChart');
-    var airChart = new Chart(ctx, {
-        type: 'line',
-        data: {
-        },
-        options: {
-        }
-    });
-    </script>
+        This is fine.
+        <canvas id="airChart" width="400" height="400"></canvas>
     </body>
+    <script>
+    var ctx = document.getElementById('airChart').getContext("2d");
+
+    var timestamps = {{timestamps|safe}};
+    var readings = {{data|safe}};
+
+    var data = {
+        labels: timestamps,
+        datasets: [
+            {
+                label: "My First dataset",
+                fillColor: "rgba(220,220,220,0.2)",
+                strokeColor: "rgba(220,220,220,1)",
+                pointColor: "rgba(220,220,220,1)",
+                pointStrokeColor: "#fff",
+                pointHighlightFill: "#fff",
+                pointHighlightStroke: "rgba(220,220,220,1)",
+                data: readings
+            }
+        ]
+    };
+    var airChart = new Chart(ctx).Line(data);
+    </script>
 </html>

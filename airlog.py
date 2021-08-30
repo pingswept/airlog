@@ -1,11 +1,19 @@
 import time
-import board
-import busio
+import pandas as pd
 from flask import Flask, render_template
 
 app = Flask(__name__)
 
 @app.route("/")
 def test_concentration():
-    return render_template('index.htm')
+    con = sqlite3.connect("flaskr.db")
+    df = pd.read_sql_query("SELECT * FROM readings", con)
 
+    print(df.to_json())
+
+    con.close()
+
+    timestamps = df['date'].values.tolist()
+    data = df['co2'].values.tolist()
+
+    return render_template('index.htm', timestamps=timestamps, data=data)
