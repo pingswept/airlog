@@ -1,6 +1,5 @@
 ```
 sudo pip3 install adafruit-circuitpython-scd30
-sudo pip3 install pysqlite3
 sudo pip3 install pandas
 sudo apt-get install libatlas-base-dev
 sudo pip3 install flask
