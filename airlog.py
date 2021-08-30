@@ -1,12 +1,13 @@
 import time
 import pandas as pd
+import sqlite3
 from flask import Flask, render_template
 
 app = Flask(__name__)
 
 @app.route("/")
 def test_concentration():
-    con = sqlite3.connect("flaskr.db")
+    con = sqlite3.connect("airlog.db")
     df = pd.read_sql_query("SELECT * FROM readings", con)
 
     print(df.to_json())
