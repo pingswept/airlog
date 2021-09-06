@@ -1,0 +1,7 @@
+all:
+  hosts:
+    air1.nolop.org:
+    air2.nolop.org:
+    air3.nolop.org:
+    air4.nolop.org:
+    air5.nolop.org:
