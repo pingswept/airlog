@@ -3,9 +3,9 @@
     tasks:
       - debug: msg="Ansible is working!"
       - name: Install packages with apt
-          apt: name= state=latest
-          sudo: true
-          with_items:
+        apt: name= state=latest
+        sudo: true
+        with_items:
             - libatlas-base-dev
             - supervisor
       - name: Install Python packages
@@ -14,3 +14,10 @@
             - adafruit-circuitpython-scd30
             - flask
             - pandas
+       - name: Copy file with owner and permissions
+         ansible.builtin.copy:
+           src: supervisord.conf
+           dest: /etc/supervisor/supervisord.conf
+           owner: foo
+           group: foo
+           mode: '0644'
