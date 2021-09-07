@@ -12,7 +12,6 @@ Add to `/etc/supervisor/supervisord.conf`:
 ```
 [program:airlog_webserver]
 directory=/home/pi/airlog
-environment=FLASK_APP="airlog.py"
 command=python3 -m flask run --host=0.0.0.0
 
 [program:airlog_logger]
