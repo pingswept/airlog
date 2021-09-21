@@ -29,7 +29,7 @@ while True:
         print("")
         print("Waiting for new data...")
         print("")
-        db_write_cmd = 'INSERT INTO readings VALUES ("{0}", {1}, {2}, {3})'.format(dt.datetime.now(tz).strftime("%m/%d/%Y, %H:%M:%S"), scd.CO2, scd.temperature, scd.relative_humidity)
+        db_write_cmd = 'INSERT INTO readings VALUES ("{0}", {1}, {2}, {3})'.format(dt.datetime.now(tz).strftime("%Y-%m-%d %H:%M:%S"), scd.CO2, scd.temperature, scd.relative_humidity)
         print(db_write_cmd)
         cur.execute(db_write_cmd)
         con.commit()
