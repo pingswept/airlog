@@ -29,6 +29,9 @@ con.commit()
 con.close()
 ```
 
-Check the hosts are online
+Set up passwordless login
+`ssh-keygen`
+`ssh-copy-id pi@air1.nolop.org`
 
+Check the hosts are online
 `ansible -u pi -i hosts.ini air -m ping`
