@@ -39,4 +39,5 @@ ssh-copy-id pi@air1.nolop.org
 Useful ad hoc ansible commands
 ```
 ansible -u pi -i hosts.ini air -m ping
-ansible -i hosts.ini air -m git -a "repo=git@github.com:pingswept/airlog.git dest=/home/pi/airlog update=yes clone=no" -u pi```
+ansible -i hosts.ini air -m git -a "repo=git@github.com:pingswept/airlog.git dest=/home/pi/airlog update=yes clone=no" -u pi
+```
