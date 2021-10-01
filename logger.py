@@ -15,7 +15,7 @@ i2c = busio.I2C(board.SCL, board.SDA, frequency=50000)
 scd = adafruit_scd30.SCD30(i2c)
 
 tz = pytz.timezone('America/New_York')
-con = sqlite3.connect('airlog.db')
+con = sqlite3.connect('../airlog.db')
 cur = con.cursor()
 
 while True:
