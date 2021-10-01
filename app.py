@@ -11,7 +11,7 @@ app = Flask(__name__)
 def test_concentration():
     delta = dt.timedelta(days=3)
     # generate a string that looks like this: 'http://air1.nolop.org:5000/range/2021-09-23/2021-09-25'
-    addr = 'http://127.0.0.1:5000/range/' + (dt.date.today() - delta).isoformat() + '/' + dt.date.today().isoformat()
+    addr = 'http://127.0.0.1:5000/range/' + (dt.date.today() - delta).isoformat() + '/' + (dt.date.today() + dt.timedelta(days=1)).isoformat()
     r = requests.get(addr).json()
     return render_template('index.htm', timestamps=r['timestamps'], data=r['data'])
 
