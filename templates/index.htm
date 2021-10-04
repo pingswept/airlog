@@ -13,7 +13,17 @@
         </div>
     </body>
     <script>
+    async function fetchAsync () {
+        let response = await fetch('http://127.0.0.1:5000/range/2021-10-01/2021-10-04');
+        let data = await response.json();
+        return data;
+    }
+
     var ctx = document.getElementById('airChart').getContext("2d");
+
+    fetchAsync()
+        .then(data => console.log(data))
+        .catch(reason => console.log(reason.message))
 
     var timestamps = {{timestamps|safe}};
     var readings = {{data|safe}};
@@ -47,4 +57,4 @@
         }
     });
     </script>
-v</html>
+</html>

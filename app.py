@@ -4,8 +4,13 @@ import pandas as pd
 import requests
 import sqlite3
 from flask import Flask, render_template
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app) # should probably switch to a more restrictive decorator instead of this
+          # https://flask-cors.readthedocs.io/en/latest/api.html#decorator
+
+app.config['TEMPLATES_AUTO_RELOAD'] = True
 
 @app.route("/")
 def test_concentration():
