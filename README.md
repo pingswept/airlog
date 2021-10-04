@@ -2,7 +2,7 @@ Set up wireless connection and enable SSH and I2C in `raspi-config`
 
 ```
 sudo apt install libatlas-base-dev git python3-pip supervisor # don't use pip to install Supervisor
-sudo pip3 install pandas flask adafruit-circuitpython-scd30
+sudo pip3 install pandas flask flask-cors adafruit-circuitpython-scd30
 export FLASK_APP=airlog
 python3 -m flask run --host=0.0.0.0
 ```
