@@ -4,57 +4,30 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.5.1/chart.min.js"></script>
+        <script src='https://cdn.plot.ly/plotly-2.4.2.min.js'></script>
         <title>Nolop Air Quality</title>
     </head>
     <body>
         <div class="chart-container" style="position: relative; height:40vh; width:80vw">
-            <canvas id="airChart" width="400" height="400"></canvas>
+            <div id="airChart"></div>
         </div>
     </body>
     <script>
     async function fetchAsync () {
-        let response = await fetch('http://air5.nolop.org:5000/range/2021-10-01/2021-10-04');
+        let response = await fetch('http://air5.nolop.org:5000/range/2021-09-29/2021-10-06');
         let data = await response.json();
         return data;
     }
 
-    var ctx = document.getElementById('airChart').getContext("2d");
-
-    fetchAsync()
-        .then(data => console.log(data))
-        .catch(reason => console.log(reason.message))
-
-    var timestamps = {{timestamps|safe}};
-    var readings = {{data|safe}};
-
-    var data = {
-        labels: timestamps,
-        datasets: [
-            {
-                label: "CO2 concentration in Nolop [PPM]",
-                fillColor: "rgba(220,220,220,0.2)",
-                strokeColor: "rgba(220,220,220,1)",
-                pointColor: "rgba(220,220,220,1)",
-                pointStrokeColor: "#fff",
-                pointHighlightFill: "#fff",
-                pointHighlightStroke: "rgba(220,220,220,1)",
-                data: readings
-            }
-        ]
-    };
-    var airChart = new Chart(ctx, {
-        type: 'line',
-        data: data,
-        options: {
-            maintainAspectRatio: false,
-            scales: {
-                y: {
-                    max: 1000,
-                    min: 300
-                }
-            }
-        }
+    fetchAsync().then(data => {
+        console.log(data);
+        var points = [
+        {
+            x: data['timestamps'],
+            y: data['data'],
+            type: 'scatter'
+        }];
+        Plotly.newPlot('airChart', points);
     });
     </script>
 </html>
