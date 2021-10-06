@@ -15,10 +15,31 @@
     <script>
     async function plotData() {
       try {
-        const [air4, air5] = await Promise.all([
+        const [air1, air2, air3, air4, air5] = await Promise.all([
+          fetch('http://air1.nolop.org:5000/range/2021-09-29/2021-10-06').then((response) => response.json()),
+          fetch('http://air2.nolop.org:5000/range/2021-09-29/2021-10-06').then((response) => response.json()),
+          fetch('http://air3.nolop.org:5000/range/2021-09-29/2021-10-06').then((response) => response.json()),
           fetch('http://air4.nolop.org:5000/range/2021-09-29/2021-10-06').then((response) => response.json()),
           fetch('http://air5.nolop.org:5000/range/2021-09-29/2021-10-06').then((response) => response.json()),
         ]);
+        var trace1 = {
+            x: air1['timestamps'],
+            y: air1['data'],
+            type: 'scatter',
+            name: 'air1'
+        };
+        var trace2 = {
+            x: air2['timestamps'],
+            y: air2['data'],
+            type: 'scatter',
+            name: 'air2'
+        };
+        var trace3 = {
+            x: air3['timestamps'],
+            y: air3['data'],
+            type: 'scatter',
+            name: 'air3'
+        };
         var trace4 = {
             x: air4['timestamps'],
             y: air4['data'],
@@ -31,7 +52,7 @@
             type: 'scatter',
             name: 'air5'
         };
-        var traces = [trace4, trace5];
+        var traces = [trace1, trace2, trace3, trace4, trace5];
         Plotly.newPlot('airChart', traces);
       } catch (err) {
         console.log(err);
