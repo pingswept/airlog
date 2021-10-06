@@ -13,21 +13,30 @@
         </div>
     </body>
     <script>
-    async function fetchAsync () {
-        let response = await fetch('http://air5.nolop.org:5000/range/2021-09-29/2021-10-06');
-        let data = await response.json();
-        return data;
+    async function plotData() {
+      try {
+        const [air4, air5] = await Promise.all([
+          fetch('http://air4.nolop.org:5000/range/2021-09-29/2021-10-06').then((response) => response.json()),
+          fetch('http://air5.nolop.org:5000/range/2021-09-29/2021-10-06').then((response) => response.json()),
+        ]);
+        var trace4 = {
+            x: air4['timestamps'],
+            y: air4['data'],
+            type: 'scatter',
+            name: 'air4'
+        };
+        var trace5 = {
+            x: air5['timestamps'],
+            y: air5['data'],
+            type: 'scatter',
+            name: 'air5'
+        };
+        var traces = [trace4, trace5];
+        Plotly.newPlot('airChart', traces);
+      } catch (err) {
+        console.log(err);
+      }
     }
-
-    fetchAsync().then(data => {
-        console.log(data);
-        var points = [
-        {
-            x: data['timestamps'],
-            y: data['data'],
-            type: 'scatter'
-        }];
-        Plotly.newPlot('airChart', points);
-    });
+    plotData();
     </script>
 </html>
