@@ -15,12 +15,15 @@
     <script>
     async function plotData() {
       try {
+        var today  = new Date();
+        var end = today.toISOString("en-US").split('/').join('-');
+        console.log(end);
         const [air1, air2, air3, air4, air5] = await Promise.all([
-          fetch('http://air1.nolop.org:5000/range/2021-09-29/2021-10-06').then((response) => response.json()),
-          fetch('http://air2.nolop.org:5000/range/2021-09-29/2021-10-06').then((response) => response.json()),
-          fetch('http://air3.nolop.org:5000/range/2021-09-29/2021-10-06').then((response) => response.json()),
-          fetch('http://air4.nolop.org:5000/range/2021-09-29/2021-10-06').then((response) => response.json()),
-          fetch('http://air5.nolop.org:5000/range/2021-09-29/2021-10-06').then((response) => response.json()),
+          fetch('http://air1.nolop.org:5000/range/2021-10-15/' + end).then((response) => response.json()),
+          fetch('http://air2.nolop.org:5000/range/2021-10-15/' + end).then((response) => response.json()),
+          fetch('http://air3.nolop.org:5000/range/2021-10-15/' + end).then((response) => response.json()),
+          fetch('http://air4.nolop.org:5000/range/2021-10-15/' + end).then((response) => response.json()),
+          fetch('http://air5.nolop.org:5000/range/2021-10-15/' + end).then((response) => response.json()),
         ]);
         var trace1 = {
             x: air1['timestamps'],
